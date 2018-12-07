@@ -30,7 +30,6 @@ This repository is only dedicated to the server-side part of the project
 ### 3) Install dependencies
 	pip install -r requirements.txt
 ### 4) Prepare DB
-    python manage.py makemigrations
     python manage.py migrate
 To visualize database, we recommend [DB Browser for SQLite](https://sqlitebrowser.org/)
 ### 5) Run server
