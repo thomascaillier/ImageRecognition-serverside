@@ -17,7 +17,7 @@ This repository is only dedicated to the server-side part of the project
 
 ## Quick start on Windows
 ### Prerequires
- - Python 3
+ - Python 3.4, 3.5, 3.6 version 64 bits
  - git
  - pip
 
