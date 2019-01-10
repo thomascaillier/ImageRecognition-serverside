@@ -298,5 +298,6 @@ $RECYCLE.BIN/
 
 # Database & DB files
 db.sqlite3
-images/base/*
-images/zone_detected/*
+processor/images/base/*
+processor/images/zone_detected/*
+processor/logos_dataset/*
