@@ -31,10 +31,10 @@ def post_image(request):
         return JsonResponse({"Success": False})
 
     # Save image and store path in DB
-    image.base_image.save('IMG_'+str(image.id)+'.jpg', File(request_image))
+    image.file.save('IMG_' + str(image.id) + '.jpg', File(request_image))
 
     # Return response
-    if image.base_image is not None:
+    if image.file is not None:
         return JsonResponse({"Success": True, "Key": image.id}, status=201)
     else:
         image.delete()
@@ -54,13 +54,15 @@ def get_data(request, server_id):
         return JsonResponse({"Success": False, "Message": "Database error: the requested image doesn't exist anymore"})
 
     # Ask Processor the Feature detection
-    Processor.process(image)
     corresponding_images = CorrespondingImages.objects.filter(base_image=image.id)
+    if len(corresponding_images) == 0:
+        Processor.process(image)
+        corresponding_images = CorrespondingImages.objects.filter(base_image=image.id)
     results = []
     for corresponding_image in corresponding_images:
         results.append({
             ID_KEY: 666,
-            IMAGE_KEY: base64.encodebytes(bytearray(io.open(image.base_image.path, 'rb').read())).decode(
+            IMAGE_KEY: base64.encodebytes(bytearray(io.open(corresponding_image.image.path, 'rb').read())).decode(
                 'utf-8'),
             PROBABILITY_KEY: random.random()
         })

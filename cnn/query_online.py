@@ -49,7 +49,7 @@ def analyse_image(image):
     #queryDir = args["query"]
     #queryDir = './database/001_accordion_image_0001.jpg'
 
-    image_bytes = read_images(image.base_image.url)
+    image_bytes = read_images(image.file.url)
     img = Image.open(io.BytesIO(image_bytes))  # on
     img.save('test.jpeg')
 
@@ -77,13 +77,13 @@ def analyse_image(image):
     maxres = 3
     imlist = [imgNames[index] for i, index in enumerate(rank_ID[0:maxres])]
 
-    for i, im in enumerate(imlist):
+    '''for i, im in enumerate(imlist):
         image = mpimg.imread('../dataset-retr/train'+"/"+im.decode('utf-8'))
         plt.subplot(2, 3, i+4)
         plt.imshow(image)
         plt.title("search output %d" % (i + 1))
         plt.axis('off')
-    plt.show()
+    plt.show()'''
 
     im = imlist[0]
     im0 = im.decode('utf-8')

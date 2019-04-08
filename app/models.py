@@ -9,7 +9,7 @@ class Image(models.Model):
     id = models.AutoField(
         primary_key=True
     )
-    base_image = models.ImageField(
+    file = models.ImageField(
         upload_to='images/base',
         default=None,
         blank=True,
