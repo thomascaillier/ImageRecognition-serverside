@@ -2,6 +2,8 @@ import base64
 import io
 import json
 
+from django.core.files import File
+from django.core.files.base import ContentFile
 from numpy import random
 
 from app.models import CorrespondingImages
@@ -21,11 +23,13 @@ class Processor:
             img = analyseresult[2*i]
             score = analyseresult[2*i+1]
             print(img, score)
-            Image = open("./dataset-retr/train" + "/" + img, "rb")
+            Image = open("../dataset-retr/train" + "/" + img, "rb")
             imageContent = Image.read()
             Image.close()
             imgb64 = base64.b64encode(imageContent)
-            model = CorrespondingImages(image =imgb64, base_image=image,score=score)
+            model = CorrespondingImages(base_image=image, score=score)
+            model.save()
+            model.image.save('IMG_' + str(image.id) + '.jpg', ContentFile(imgb64))
             model.save()
         '''image.zone_detected_image.save('IMG_' + str(image.id) + '.jpg', image.base_image)
         data = {

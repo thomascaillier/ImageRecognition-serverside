@@ -26,7 +26,7 @@ args = vars(ap.parse_args())
 '''
 
 def read_images(url):
-    with open(url, "rb") as _image:
+    with open('../' + url, "rb") as _image:
         f = _image.read()
         b = bytearray(f)
         return b
@@ -49,7 +49,7 @@ def analyse_image(image):
     #queryDir = args["query"]
     #queryDir = './database/001_accordion_image_0001.jpg'
 
-    image_bytes = read_images(image.base_image)
+    image_bytes = read_images(image.base_image.url)
     img = Image.open(io.BytesIO(image_bytes))  # on
     img.save('test.jpeg')
 
@@ -78,7 +78,7 @@ def analyse_image(image):
     imlist = [imgNames[index] for i, index in enumerate(rank_ID[0:maxres])]
 
     for i, im in enumerate(imlist):
-        image = mpimg.imread('./dataset-retr/train'+"/"+im.decode('utf-8'))
+        image = mpimg.imread('../dataset-retr/train'+"/"+im.decode('utf-8'))
         plt.subplot(2, 3, i+4)
         plt.imshow(image)
         plt.title("search output %d" % (i + 1))

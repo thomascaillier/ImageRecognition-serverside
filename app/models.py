@@ -1,4 +1,8 @@
+import os
+
 from django.db import models
+
+import app
 
 
 class Image(models.Model):
@@ -13,7 +17,7 @@ class Image(models.Model):
     )
 
 
-class CorrespondingImages:
+class CorrespondingImages(models.Model):
     id = models.AutoField(
         primary_key=True
     )
@@ -31,3 +35,5 @@ class CorrespondingImages:
         default=0,
         null=False
     )
+
+
