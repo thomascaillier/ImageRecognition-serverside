@@ -86,7 +86,7 @@ if __name__ == "__main__":
 
     #db = args["database"]
     #db = img_paths = './database'
-    db = img_paths = 'dataset-retr/train'
+    db = img_paths = '../dataset-retr/train'
     img_list = get_imlist(db)
 
     print("--------------------------------------------------")
