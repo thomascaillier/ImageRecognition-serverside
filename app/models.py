@@ -1,5 +1,4 @@
 from django.db import models
-from jsonfield import JSONField
 
 
 class Image(models.Model):
@@ -10,14 +9,25 @@ class Image(models.Model):
         upload_to='images/base',
         default=None,
         blank=True,
-        null=True
+        null=False
     )
-    zone_detected_image = models.ImageField(
-        upload_to='images/zone_detected',
+
+
+class CorrespondingImages:
+    id = models.AutoField(
+        primary_key=True
+    )
+    image = models.ImageField(
+        upload_to='corresponding_images',
         default=None,
         blank=True,
-        null=True
+        null=False
     )
-    corresponding_data = JSONField(
-        default={}
+    base_image = models.ForeignKey(
+        Image,
+        on_delete=models.CASCADE
+    )
+    score = models.FloatField(
+        default=0,
+        null=False
     )
